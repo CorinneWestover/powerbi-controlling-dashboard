@@ -27,8 +27,8 @@
                 }
               },
               "queryRef": "_Measures.Variance %",
-              "nativeQueryRef": "Variance %",
-              "displayName": "Variance %"
+              "nativeQueryRef": "Variance to Budget",
+              "displayName": "Variance to Budget"
             }
           ]
         }

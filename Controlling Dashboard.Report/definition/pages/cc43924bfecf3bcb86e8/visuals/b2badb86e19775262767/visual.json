@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "b2badb86e19775262767",
   "position": {
-    "x": 456,
-    "y": 188,
+    "x": 455.71428571428572,
+    "y": 188.57142857142858,
     "z": 0,
-    "height": 232,
-    "width": 804,
+    "height": 247.14285714285717,
+    "width": 804.28571428571433,
     "tabOrder": 0
   },
   "visual": {
@@ -61,8 +61,8 @@
                 }
               },
               "queryRef": "_Measures.Sales Amount",
-              "nativeQueryRef": "Actual",
-              "displayName": "Actual"
+              "nativeQueryRef": "Sales",
+              "displayName": "Sales"
             },
             {
               "field": {
@@ -105,7 +105,8 @@
                 }
               },
               "queryRef": "_Measures.Variance %",
-              "nativeQueryRef": "Variance %"
+              "nativeQueryRef": "Variance to Budget %",
+              "displayName": "Variance to Budget %"
             }
           ]
         }
@@ -120,10 +121,10 @@
                     "Entity": "_Measures"
                   }
                 },
-                "Property": "Variance %"
+                "Property": "Sales Amount"
               }
             },
-            "direction": "Descending"
+            "direction": "Ascending"
           }
         ]
       }
@@ -189,6 +190,17 @@
             ],
             "metadata": "_Measures.Variance"
           }
+        },
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "13D"
+                }
+              }
+            }
+          }
         }
       ],
       "columnHeaders": [
@@ -197,7 +209,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "12D"
+                  "Value": "13D"
                 }
               }
             }
@@ -210,7 +222,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "12D"
+                  "Value": "13D"
                 }
               }
             }

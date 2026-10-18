@@ -27,8 +27,8 @@
                 }
               },
               "queryRef": "_Measures.Sales Amount",
-              "nativeQueryRef": "Actual",
-              "displayName": "Actual"
+              "nativeQueryRef": "Sales",
+              "displayName": "Sales"
             }
           ]
         }

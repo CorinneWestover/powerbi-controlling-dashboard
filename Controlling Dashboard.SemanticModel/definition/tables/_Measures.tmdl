@@ -31,7 +31,7 @@ table _Measures
 
 	/// Number of unique sales orders.
 	measure Orders = DISTINCTCOUNT ( 'Sales Order'[Sales Order] )
-		formatString: 0
+		formatString: #,0
 		lineageTag: 6570f2e3-c64f-453e-8733-54f904a9d098
 
 	/// Total planned sales from the budget, available by month and sales territory for FY2019 and FY2020.
@@ -88,7 +88,7 @@ table _Measures
 		lineageTag: bc58f610-a86c-4adc-8a2b-116911407235
 
 	/// Formatting helper. Returns green when sales are at or above budget and red when below. Used for conditional formatting, not shown as a value.
-	measure 'Variance Color' = IF ( [Variance] >= 0, "#2E7D32", "#C62828" )
+	measure 'Variance Color' = IF ( [Variance] >= 0, "#008089", "#D64550" )
 		isHidden
 		lineageTag: aded0a0b-5d33-4645-bb3b-511f88a24f5f
 
@@ -115,6 +115,26 @@ table _Measures
 			)
 		formatString: 0
 		lineageTag: 87ea25bd-137b-47a7-8f95-77b10e8e0b2a
+
+	/// Gross margin % for internet sales only.
+	measure 'Internet Margin %' =
+			
+			CALCULATE ( [Gross Margin %], 'Sales Order'[Channel] = "Internet" )
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 3811a60f-63a1-46e5-8aa0-71edb5072872
+
+	/// Gross margin % for reseller sales only.
+	measure 'Reseller Margin %' =
+			
+			CALCULATE ( [Gross Margin %], 'Sales Order'[Channel] = "Reseller" )
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 5cae3a32-2e7d-4b1b-9ff8-268d01923217
+
+	measure 'Margin Color' = IF ( [Reseller Margin %] < 0, "#D64550", "#008089" )
+		isHidden
+		lineageTag: a02002b6-b28d-49eb-b13c-b2a0c121bb09
+
+		changedProperty = IsHidden
 
 	partition _Measures = m
 		mode: import
