@@ -1,5 +1,6 @@
 table Date
 	lineageTag: a68877eb-1cae-4c7e-bb47-2e2711a3069f
+	dataCategory: Time
 
 	column DateKey
 		dataType: int64
@@ -12,15 +13,11 @@ table Date
 
 	column Date
 		dataType: dateTime
+		isKey
 		formatString: Long Date
 		lineageTag: 62b5dbf9-a9d5-4f63-b942-0567ce71603c
 		summarizeBy: none
 		sourceColumn: Date
-
-		variation Variation
-			isDefault
-			relationship: 42bdfb73-a030-4a14-abf3-2cada556ab9f
-			defaultHierarchy: LocalDateTable_eb5197f7-6fca-49ba-a248-87885710fd74.'Date Hierarchy'
 
 		annotation SummarizationSetBy = Automatic
 
@@ -48,11 +45,9 @@ table Date
 		lineageTag: 9f52cea8-7a7d-4a0c-865d-458b59a76060
 		summarizeBy: none
 		sourceColumn: Month
+		sortByColumn: MonthKey
 
-		variation Variation
-			isDefault
-			relationship: 63fe4604-8b3a-42fc-9dd6-ff4cec6f8e49
-			defaultHierarchy: LocalDateTable_d2e279e4-f4a0-4a60-8cc4-ff08ddd7d6b3.'Date Hierarchy'
+		changedProperty = SortByColumn
 
 		annotation SummarizationSetBy = Automatic
 
@@ -64,11 +59,6 @@ table Date
 		lineageTag: 1a1f9728-1652-4dda-b189-9bbccc063d5e
 		summarizeBy: none
 		sourceColumn: Full Date
-
-		variation Variation
-			isDefault
-			relationship: 930ea8ff-4943-4e06-af74-f37ce8b23e1e
-			defaultHierarchy: LocalDateTable_e52c5935-a018-40b3-aa23-05185375cadc.'Date Hierarchy'
 
 		annotation SummarizationSetBy = Automatic
 

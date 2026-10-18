@@ -8,21 +8,19 @@ table Budget
 		summarizeBy: none
 		sourceColumn: Date
 
-		variation Variation
-			isDefault
-			relationship: 9e3fa319-c8f5-47cd-ac72-9dbcedf83caf
-			defaultHierarchy: LocalDateTable_434624b7-c6d5-4a11-8b88-103f945752f4.'Date Hierarchy'
-
 		annotation SummarizationSetBy = Automatic
 
 		annotation UnderlyingDateTimeDataType = Date
 
 	column SalesTerritoryKey
 		dataType: int64
+		isHidden
 		formatString: 0
 		lineageTag: 67ec30ea-9a04-4525-976e-44e3f81e341f
 		summarizeBy: none
 		sourceColumn: SalesTerritoryKey
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
@@ -39,10 +37,13 @@ table Budget
 
 	column DateKey
 		dataType: int64
+		isHidden
 		formatString: 0
 		lineageTag: 6de9faf0-1902-45d0-9e90-e39fac8cff38
 		summarizeBy: none
 		sourceColumn: DateKey
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 

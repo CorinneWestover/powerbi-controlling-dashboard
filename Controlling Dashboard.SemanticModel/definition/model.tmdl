@@ -7,24 +7,19 @@ model Model
 		legacyRedirects
 		returnErrorValuesAsNull
 
-annotation __PBI_TimeIntelligenceEnabled = 1
+annotation __PBI_TimeIntelligenceEnabled = 0
 
 annotation PBI_ProTooling = ["DevMode"]
 
 annotation PBI_QueryOrder = ["Date","Product","Reseller","Sales Order","Territory","Sales","Budget"]
 
 ref table Date
-ref table DateTableTemplate_d696eddc-3608-477d-a54e-90c92aecb06a
-ref table LocalDateTable_eb5197f7-6fca-49ba-a248-87885710fd74
-ref table LocalDateTable_d2e279e4-f4a0-4a60-8cc4-ff08ddd7d6b3
-ref table LocalDateTable_e52c5935-a018-40b3-aa23-05185375cadc
 ref table Product
 ref table Reseller
 ref table 'Sales Order'
 ref table Territory
 ref table Sales
 ref table Budget
-ref table LocalDateTable_434624b7-c6d5-4a11-8b88-103f945752f4
 
 ref cultureInfo en-US
 

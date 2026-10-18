@@ -3,55 +3,73 @@ table Sales
 
 	column SalesOrderLineKey
 		dataType: int64
+		isHidden
 		formatString: 0
 		lineageTag: 4fd01c35-2348-49ba-8135-772d97da7ad8
 		summarizeBy: none
 		sourceColumn: SalesOrderLineKey
 
+		changedProperty = IsHidden
+
 		annotation SummarizationSetBy = Automatic
 
 	column ResellerKey
 		dataType: int64
+		isHidden
 		formatString: 0
 		lineageTag: 4f49a88e-f547-4156-bdfe-a87697176b42
 		summarizeBy: none
 		sourceColumn: ResellerKey
 
+		changedProperty = IsHidden
+
 		annotation SummarizationSetBy = Automatic
 
 	column CustomerKey
 		dataType: int64
+		isHidden
 		formatString: 0
 		lineageTag: 4c5de524-25a5-4263-bc2d-317990a655b4
 		summarizeBy: count
 		sourceColumn: CustomerKey
 
+		changedProperty = IsHidden
+
 		annotation SummarizationSetBy = Automatic
 
 	column ProductKey
 		dataType: int64
+		isHidden
 		formatString: 0
 		lineageTag: 4277d320-c6b8-413d-a97f-d1ff3ec2332f
 		summarizeBy: none
 		sourceColumn: ProductKey
 
+		changedProperty = IsHidden
+
 		annotation SummarizationSetBy = Automatic
 
 	column OrderDateKey
 		dataType: int64
+		isHidden
 		formatString: 0
 		lineageTag: 7874966f-38ef-4f92-bdfb-0bd708bd7e75
-		summarizeBy: count
+		summarizeBy: none
 		sourceColumn: OrderDateKey
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
 	column SalesTerritoryKey
 		dataType: int64
+		isHidden
 		formatString: 0
 		lineageTag: 7e650a8f-6434-4dba-b619-40c8ffb3d8b3
 		summarizeBy: none
 		sourceColumn: SalesTerritoryKey
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
