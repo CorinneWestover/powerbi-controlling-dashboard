@@ -94,6 +94,7 @@ table _Measures
 
 		changedProperty = IsHidden
 
+	/// Number of sales regions at or above budget in the selected period.
 	measure 'Regions Ahead of Plan' =
 			
 			COUNTROWS (
@@ -105,6 +106,7 @@ table _Measures
 		formatString: 0
 		lineageTag: 7be37d54-53c2-47bf-9896-0a21a9dbef93
 
+	/// Number of sales regions below budget in the selected period.
 	measure 'Regions Behind Plan' =
 			
 			COUNTROWS (
@@ -130,6 +132,7 @@ table _Measures
 		formatString: 0.0%;-0.0%;0.0%
 		lineageTag: 5cae3a32-2e7d-4b1b-9ff8-268d01923217
 
+	/// Formatting helper. Returns red when the reseller margin is negative and teal when positive. Used for conditional formatting.
 	measure 'Margin Color' = IF ( [Reseller Margin %] < 0, "#D64550", "#008089" )
 		isHidden
 		lineageTag: a02002b6-b28d-49eb-b13c-b2a0c121bb09
