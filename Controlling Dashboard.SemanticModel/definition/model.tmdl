@@ -11,7 +11,7 @@ annotation __PBI_TimeIntelligenceEnabled = 0
 
 annotation PBI_ProTooling = ["DevMode"]
 
-annotation PBI_QueryOrder = ["Date","Product","Reseller","Sales Order","Territory","Sales","Budget"]
+annotation PBI_QueryOrder = ["Date","Product","Reseller","Sales Order","Territory","Sales","Budget","_Measures"]
 
 ref table Date
 ref table Product
@@ -20,6 +20,7 @@ ref table 'Sales Order'
 ref table Territory
 ref table Sales
 ref table Budget
+ref table _Measures
 
 ref cultureInfo en-US
 

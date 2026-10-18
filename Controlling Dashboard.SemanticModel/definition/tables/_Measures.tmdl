@@ -1,0 +1,108 @@
+table _Measures
+	lineageTag: 77a7437a-e144-40d6-acd7-ccdaedf9b55a
+
+	/// Total actual sales revenue of all order lines, in USD.
+	measure 'Sales Amount' = SUM ( Sales[Sales Amount] )
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 5c90cf06-95c5-4dd7-97f0-1d1a5b55335a
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	/// Total product cost of all sold order lines, in USD.
+	measure 'Total Cost' = SUM ( Sales[Total Product Cost] )
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: fc72da90-0139-4917-b361-aa5b1b9cfc12
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	/// Sales Amount minus Total Cost.
+	measure 'Gross Margin' = [Sales Amount] - [Total Cost]
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 5505dc80-b1cb-4a7e-b6b8-b289b561f6dc
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	/// Gross Margin as a share of Sales Amount. Blank when there are no sales.
+	measure 'Gross Margin %' = DIVIDE ( [Gross Margin], [Sales Amount] )
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: f47360a7-c0e5-4d09-b228-f5bb92d72d37
+
+	/// Number of unique sales orders.
+	measure Orders = DISTINCTCOUNT ( 'Sales Order'[Sales Order] )
+		formatString: 0
+		lineageTag: 6570f2e3-c64f-453e-8733-54f904a9d098
+
+	/// Total planned sales from the budget, available by month and sales territory for FY2019 and FY2020.
+	measure 'Budget Amount' = SUM ( Budget[Budget Amount] )
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 43201b41-aa98-4b0d-a009-4c0c26ae3ef5
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	/// Actual sales minus budget. Positive means ahead of plan. Blank where no budget exists, so FY2018 does not show as over budget.
+	measure Variance =
+			
+			SUMX (
+			    VALUES ( 'Date'[MonthKey] ),
+			    IF (
+			        NOT ISBLANK ( [Budget Amount] ),
+			        [Sales Amount] - [Budget Amount]
+			    )
+			)
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 8d07b304-e9cb-48a6-8dba-f7b928b58540
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	/// Variance as a share of Budget Amount. Blank where no budget exists.
+	measure 'Variance %' = DIVIDE ( [Variance], [Budget Amount] )
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 50962b78-0b4b-4f06-b3e8-fdf3470daa88
+
+	/// Sales accumulated from the start of the fiscal year (1 July) up to the selected period.
+	measure 'Sales YTD' = TOTALYTD ( [Sales Amount], 'Date'[Date], "06-30" )
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 113f63ac-291c-4d27-b8f9-1ed158910b11
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	/// Budget accumulated from the start of the fiscal year (1 July) up to the selected period.
+	measure 'Budget YTD' = TOTALYTD ( [Budget Amount], 'Date'[Date], "06-30" )
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 58687822-6846-4453-b82c-503bd8204c20
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	/// Sales for the same period in the prior year.
+	measure 'Sales PY' = CALCULATE ( [Sales Amount], SAMEPERIODLASTYEAR ( 'Date'[Date] ) )
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: d5a704f4-7124-488e-81ca-7308573f8945
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	/// Change in sales compared with the same period of the prior year.
+	measure 'Sales YoY %' = DIVIDE ( [Sales Amount] - [Sales PY], [Sales PY] )
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: bc58f610-a86c-4adc-8a2b-116911407235
+
+	/// Formatting helper. Returns green when sales are at or above budget and red when below. Used for conditional formatting, not shown as a value.
+	measure 'Variance Color' = IF ( [Variance] >= 0, "#2E7D32", "#C62828" )
+		isHidden
+		lineageTag: aded0a0b-5d33-4645-bb3b-511f88a24f5f
+
+		changedProperty = IsHidden
+
+	partition _Measures = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Column1"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+
