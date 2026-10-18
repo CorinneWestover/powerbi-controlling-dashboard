@@ -1,0 +1,64 @@
+table Budget
+	lineageTag: d520147b-566d-44b3-8963-a3827db76487
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 529af97d-7522-4eab-ab2a-42e770b5b0f9
+		summarizeBy: none
+		sourceColumn: Date
+
+		variation Variation
+			isDefault
+			relationship: 9e3fa319-c8f5-47cd-ac72-9dbcedf83caf
+			defaultHierarchy: LocalDateTable_434624b7-c6d5-4a11-8b88-103f945752f4.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column SalesTerritoryKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 67ec30ea-9a04-4525-976e-44e3f81e341f
+		summarizeBy: none
+		sourceColumn: SalesTerritoryKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Budget Amount'
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: baa06dc1-46d4-483f-9df7-c04969448769
+		summarizeBy: sum
+		sourceColumn: Budget Amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column DateKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 6de9faf0-1902-45d0-9e90-e39fac8cff38
+		summarizeBy: none
+		sourceColumn: DateKey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Budget = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Projects\powerbi-controlling-dashboard\data\Budget.csv"),[Delimiter=",", Columns=3, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Date", type date}, {"SalesTerritoryKey", Int64.Type}, {"Budget Amount", Currency.Type}}),
+				    #"Added Custom" = Table.AddColumn(#"Changed Type", "DateKey", each Date.Year([Date]) * 10000 + Date.Month([Date]) * 100 + Date.Day([Date])),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Added Custom",{{"DateKey", Int64.Type}})
+				in
+				    #"Changed Type1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

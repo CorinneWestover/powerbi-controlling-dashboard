@@ -7,7 +7,93 @@
         "x": 0,
         "y": 0
       },
-      "nodes": [],
+      "nodes": [
+        {
+          "location": {
+            "x": 921.23144750587608,
+            "y": 334.32829379248909
+          },
+          "nodeIndex": "Budget",
+          "nodeLineageTag": "d520147b-566d-44b3-8963-a3827db76487",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1205.4400980457087,
+            "y": 201.9376844902124
+          },
+          "nodeIndex": "Date",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 98.823721011614225,
+            "y": -50
+          },
+          "nodeIndex": "Product",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 375.90057421997244,
+            "y": 667.16004588102987
+          },
+          "nodeIndex": "Reseller",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 50,
+            "y": 570.76609382064339
+          },
+          "nodeIndex": "Sales Order",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 636.98595366695247,
+            "y": 435.67773449010838
+          },
+          "nodeIndex": "Territory",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 342.27494739931672,
+            "y": 306.746764303719
+          },
+          "nodeIndex": "Sales",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
       "name": "All tables",
       "zoomValue": 100,
       "pinKeyFieldsToTop": false,
