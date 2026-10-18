@@ -2,8 +2,6 @@
 
 A three page controlling report for a fictional bicycle company that compares actual sales with budget, tracks the year to date result against plan, and explains where margin is won and lost. Built in Power BI Desktop and saved in the Power BI Project (PBIP) format, so the data model and every DAX measure can be read directly on GitHub.
 
-![Plan vs. Actual page](images/page_2_plans_vs_actual.png)
-
 ## Business questions
 
 1. Are we ahead of or behind budget, in total and by region?
@@ -29,7 +27,13 @@ Full requirements: [docs/requirements.md](docs/requirements.md)
 | Plan vs. Actual | Variance to budget by region, regions ahead and behind plan, cumulative sales vs. budget (YTD) |
 | Products & Regions | Margin by region, sales and margin by category, margin by category and channel |
 
+### Overview
 ![Overview page](images/page_1_overview.png)
+
+### Plan vs. Actual
+![Plan vs. Actual page](images/page_2_plans_vs_actual.png)
+
+### Products & Regions
 ![Products and Regions page](images/page_3_products_regions.png)
 
 ## Data model
