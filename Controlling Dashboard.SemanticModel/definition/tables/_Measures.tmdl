@@ -41,7 +41,7 @@ table _Measures
 
 		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
 
-	/// Actual sales minus budget. Positive means ahead of plan. Blank where no budget exists, so FY2018 does not show as over budget.
+	/// Actual sales minus budget, compared month by month only where a budget exists. Positive means ahead of plan.
 	measure Variance =
 			
 			SUMX (
@@ -93,6 +93,28 @@ table _Measures
 		lineageTag: aded0a0b-5d33-4645-bb3b-511f88a24f5f
 
 		changedProperty = IsHidden
+
+	measure 'Regions Ahead of Plan' =
+			
+			COUNTROWS (
+			    FILTER (
+			        VALUES ( Territory[Region] ),
+			        NOT ISBLANK ( [Variance] ) && [Variance] >= 0
+			    )
+			)
+		formatString: 0
+		lineageTag: 7be37d54-53c2-47bf-9896-0a21a9dbef93
+
+	measure 'Regions Behind Plan' =
+			
+			COUNTROWS (
+			    FILTER (
+			        VALUES ( Territory[Region] ),
+			        [Variance] < 0
+			    )
+			)
+		formatString: 0
+		lineageTag: 87ea25bd-137b-47a7-8f95-77b10e8e0b2a
 
 	partition _Measures = m
 		mode: import
